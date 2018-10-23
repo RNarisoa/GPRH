@@ -1,0 +1,20 @@
+{
+  "name": "gprh-ades",
+  "version": "1.0.0",
+  "description": "This folder is primarily a container for the top-level pieces of the application.\r While you can remove some files and folders that this application does not use,\r be sure to read below before deciding what can be deleted and what needs to be\r kept in source control.",
+  "main": ".eslintrc.js",
+  "dependencies": {
+    "eslint-config-standard": "^12.0.0",
+    "flag-icon-css": "^3.2.0"
+  },
+  "devDependencies": {
+    "eslint": "^5.7.0",
+    "eslint-config-airbnb-base": "^13.1.0",
+    "eslint-plugin-import": "^2.14.0"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Narisoa RAKOTOVAO",
+  "license": "ISC"
+}
