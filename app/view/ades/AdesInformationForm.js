@@ -107,7 +107,7 @@ Ext.define('Gprh.ades.view.ades.AdesInformationForm', {
 							layout: 'hbox',
 							items: [
 								{
-									itemId: 'adesInformationBtn',
+									itemId: 'adesInformationSaveBtn',
 									xtype: 'button',
 									text: 'Enregistrer',
 									ui: 'soft-green-small',
@@ -117,13 +117,13 @@ Ext.define('Gprh.ades.view.ades.AdesInformationForm', {
 									},
 								},
 								{
-									itemId: 'adesInformationBtnReset',
+									itemId: 'adesInformationCancelBtn',
 									xtype: 'button',
 									text: 'Annuler',
 									ui: 'soft-blue-small',
 									margin: '10 0 0 0',
 									listeners: {
-										click: 'onAdesInformationSaveClick',
+										click: 'onAdesInformationCancelClick',
 									},
 								},
 							],

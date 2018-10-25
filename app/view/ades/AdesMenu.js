@@ -33,29 +33,49 @@ Ext.define('Gprh.ades.view.ades.AdesMenu', {
 			},
 		},
 		{
-			routeId: '',
+			routeId: 'cnaps',
+			itemId: 'cnapsMId',
 			iconCls: 'x-fa fa-umbrella',
 			text: 'CNaPS',
+			listeners: {
+				click: 'onCnapsClick',
+			},
 		},
 		{
-			routeId: '',
+			routeId: 'irsa',
+			itemId: 'irsaMId',
 			iconCls: 'x-fa fa-exclamation-circle',
 			text: 'IRSA',
+			listeners: {
+				click: 'onIrsaClick',
+			},
 		},
 		{
-			routeId: '',
+			routeId: 'smie',
+			itemId: 'smieMId',
 			iconCls: 'x-fa fa-medkit',
-			text: 'Centres médicaux',
+			text: 'Affiliation médicale',
+			listeners: {
+				click: 'onSmieClick',
+			},
 		},
 		{
-			routeId: '',
+			routeId: 'hopital',
+			itemId: 'hopitalMId',
 			iconCls: 'x-fa fa-hospital-o',
 			text: 'Hospitalisation',
+			listeners: {
+				click: 'onHopitalClick',
+			},
 		},
 		{
-			routeId: '',
+			routeId: 'grille',
+			itemId: 'grilleMId',
 			iconCls: 'x-fa fa-columns',
 			text: 'Grille salariale',
+			listeners: {
+				click: 'onGrilleClick',
+			},
 		},
 	],
 });

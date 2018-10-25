@@ -4,6 +4,13 @@ Ext.define('Gprh.ades.view.ades.AdesController', {
 	requires: [
 		'Gprh.ades.view.ades.AdesInformationForm',
 		'Gprh.ades.view.ades.structures.StructureMainContainer',
+		'Gprh.ades.view.ades.cnaps.CnapsMainContainer',
+		'Gprh.ades.view.ades.irsa.IrsaMainContainer',
+		'Gprh.ades.view.ades.smie.SmieMainContainer',
+		'Gprh.ades.view.ades.hopital.HopitalMainContainer',
+		'Gprh.ades.view.ades.grille.GrilleMainContainer',
+		'Gprh.ades.view.pages.PrototypeWindow',
+		'Gprh.ades.view.ades.grille.SalaireBasePanel',
 	],
 
 	mixins: [
@@ -11,12 +18,6 @@ Ext.define('Gprh.ades.view.ades.AdesController', {
 	],
 
 	alias: 'controller.adesController',
-
-	listeners: {
-		saveClick() {
-			this.onBackBtnClick();
-		},
-	},
 
 	init() {
 		this.setCurrentView('adesInformations');
@@ -34,7 +35,6 @@ Ext.define('Gprh.ades.view.ades.AdesController', {
 
 	setCurrentView(view, params) {
 		const contentPanel = this.getView().down('#contentPanel');
-
 		// We skip rendering for the following scenarios:
 		// * There is no contentPanel
 		// * view xtype is not specified
@@ -45,7 +45,7 @@ Ext.define('Gprh.ades.view.ades.AdesController', {
 
 		if (params && params.openWindow) {
 			const cfg = Ext.apply({
-				xtype: 'emailwindow',
+				xtype: 'prototypeWindow',
 				items: [
 					Ext.apply({
 						xtype: view,
@@ -69,29 +69,11 @@ Ext.define('Gprh.ades.view.ades.AdesController', {
 		return true;
 	},
 
-	onGridCellItemClick(view, td, cellIndex, record) {
-		if (cellIndex > 1) {
-			this.setCurrentView('emaildetails', { record });
-		} else if (cellIndex === 1) {
-			// Invert selection
-			record.set('favorite', !record.get('favorite'));
-		}
-	},
-
-	beforeDetailsRender(view) {
-		const record = view.record ? view.record : {};
-
-		view.down('#mailBody').setHtml(record.get('contents'));
-		view.down('#attachments').setData(record.get('attachments'));
-		view.down('#emailSubjectContainer').setData(record.data ? record.data : {});
-		view.down('#userImage').setSrc(`resources/images/user-profile/${record.get('user_id')}.png`);
-	},
-
 	onAdesInformationEditClick(item) {
 		this.setCurrentView('adesInformationForm', item.params);
 	},
 
-	onAdesInformationSaveClick(view, item) {
+	onAdesInformationSaveClick(view) {
 		const me = this;
 		const form = view.up('form');
 
@@ -108,7 +90,115 @@ Ext.define('Gprh.ades.view.ades.AdesController', {
 		}
 	},
 
+	onAdesInformationCancelClick() {
+		const me = this;
+		const mainView = me.getView().up('#adesMainContainer');
+			
+		mainView.down('#adesInformationsMId').fireEvent('click');
+	},
+
 	onStructuresClick() {
 		this.setCurrentView('structures');
+	},
+
+	onCnapsClick() {
+		this.setCurrentView('cnaps');
+	},
+
+	onIrsaClick() {
+		this.setCurrentView('irsa');
+	},
+
+	onSmieClick() {
+		this.setCurrentView('smie');
+	},
+
+	onHopitalClick() {
+		this.setCurrentView('hopital');
+	},
+	
+	onGrilleClick() {
+		this.setCurrentView('grille');
+	},
+
+	/*
+	 * Create a new form to fill all wadges for the given categorie
+	 * @param {object} view the Tab panel view
+	 * @param {int} rowIndex selected rowIndex
+	 * @param {int} colIndex selected colIndex
+	 * @param {object} item all items config where the event was handled
+	 * @param {object} e the event
+	 * @param {object} record selected row data
+	 * @param {object} row dom element for the row selected
+	 * 
+	 * @return {object} {@link Gprh.ades.grille.SalaireBase} instance which this class exposes.
+	 */
+
+	showGrilleWindow(view, rowIndex, colIndex, item, e, record) {
+		const config = {
+			xtype: 'prototypeWindow',
+			title: 'Salaires de base',
+			maxWidth: 400,
+			maxHeight: 450,
+			items: [
+				{
+					xtype: 'salaireBasePanel',
+					params: record,
+				},
+			],
+		};
+		
+		Ext.create(config);
+	},
+
+	onSalaireBasePanelCancelClick() {
+		this.getView().up().close();
+	},
+
+	onSalaireBasePanelSaveClick(view) {
+		const form = view.up('#salaireBasePanelFormId');
+
+		const model = {
+			infoRequest: 2,
+			data: form.getValues(),
+		};
+		const saveOrUpdate = this.requestSaveOrUpdate('server-scripts/grille/SalaireBase.php', model);
+		
+		if (saveOrUpdate.request.request.result.responseText > 0) {
+			/*const mainView = view.up('#adesMainContainer');
+			
+			mainView.down('#adesInformationsMId').fireEvent('click');*/
+			view.up().close();
+		}
+	},
+
+	/*
+	 * @param {(column, rowIndex, checked, record, e)}
+	 */
+	confirmActifCnaps(column, rowIndex, checked, record, e) {
+		const messageBox = Ext.create('Ext.window.MessageBox', {
+			itemId: 'messageBoxCnapsChecked',
+			buttons: [{
+				text: 'Oui',
+				handler() {
+					// console.log(record);
+					
+				},
+			}, {
+				text: 'Non',
+				handler: (btn) => {
+					btn.up('#messageBoxCnapsChecked').close();
+					this.getView().down('#cnapsGridId').getStore().load();
+				},
+			}],
+		});
+		
+		if (checked) {
+			messageBox.show({
+				title: 'Confirmer l\'enregistrement',
+				msg: 'Cette variable existe déjà. Voulez-vous la remplacer?',
+				icon: Ext.MessageBox.WARNING,
+			});	
+		}
 	},
 });

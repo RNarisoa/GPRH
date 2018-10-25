@@ -43,7 +43,16 @@ function InfoRequest($dao) {
 }
 
 function SaveOrUpdate($dao, $data) {
-	$SoU = $dao -> saveOrUpdateAdes($data -> ID_ADES, $data -> RAISON_SOCIALE, $data -> ADRESSE_COMPLETE, $data -> NIF, $data -> STAT, $data -> TELEPHONE, $data -> DESCRIPTION_ADES, $data -> SITE_WEB);
+	$SoU = $dao -> saveOrUpdateAdes(
+		$data -> ID_ADES,
+		$data -> RAISON_SOCIALE,
+		$data -> ADRESSE_COMPLETE,
+		$data -> NIF,
+		$data -> STAT,
+		$data -> TELEPHONE,
+		$data -> DESCRIPTION_ADES,
+		$data -> SITE_WEB
+	);
 	echo $SoU;
 }
 ?>
