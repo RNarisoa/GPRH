@@ -33,5 +33,6 @@ module.exports = {
     "globals": {
         "Ext": true,
         "window": true,
+        "Gprh": true,
     }
 };

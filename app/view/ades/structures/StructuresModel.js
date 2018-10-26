@@ -3,15 +3,8 @@ Ext.define('Gprh.ades.view.ades.structures.StructuresModel', {
 	alias: 'viewmodel.structuresModel',
 
 	requires: [
-		'Ext.data.Store',
-		'Ext.data.proxy.Memory',
-		'Ext.data.field.Integer',
-		'Ext.data.field.String',
-		'Ext.data.field.Date',
-		'Ext.data.field.Boolean',
-		'Ext.data.reader.Json',
 		'Gprh.ades.store.Centre',
-		'Gprh.ades.store.Departements',
+		'Gprh.ades.store.Departement',
 	],
 
 	stores: {
@@ -20,7 +13,7 @@ Ext.define('Gprh.ades.view.ades.structures.StructuresModel', {
 		},
 
 		departementResults: {
-			type: 'departementsStore',
+			type: 'departementStore',
 		},
 	},
 });

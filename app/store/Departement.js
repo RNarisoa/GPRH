@@ -1,10 +1,14 @@
-Ext.define('Gprh.ades.store.Departements', {
+Ext.define('Gprh.ades.store.Departement', {
 	extend: 'Ext.data.Store',
 	
 	storeId: 'departementsStore',
-	alias: 'store.departementsStore',
+	alias: 'store.departementStore',
 	
-	fields: ['idDepartement', 'nomDepartement', 'abreviationDepartement'],
+	fields: [
+		'idDepartement',
+		'nomDepartement',
+		'abreviationDepartement',
+	],
 	proxy: {
 		type: 'ajax',
 		url: 'server-scripts/listes/Departements.php',
