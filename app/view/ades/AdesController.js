@@ -165,10 +165,7 @@ Ext.define('Gprh.ades.view.ades.AdesController', {
 		const saveOrUpdate = this.requestSaveOrUpdate('server-scripts/grille/SalaireBase.php', model);
 		
 		if (saveOrUpdate.request.request.result.responseText > 0) {
-			/*const mainView = view.up('#adesMainContainer');
-			
-			mainView.down('#adesInformationsMId').fireEvent('click');*/
-			view.up().close();
+			this.getView().up().close();
 		}
 	},
 

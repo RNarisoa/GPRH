@@ -7,5 +7,6 @@ Ext.define('Gprh.ades.model.CategorieModel', {
 		'categorieProfessionnelle',
 		'descriptionCategorie',
 		'nomGroupe',
+		'nbSalaireBase',
 	],
 });

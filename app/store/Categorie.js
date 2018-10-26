@@ -10,6 +10,7 @@ Ext.define('Gprh.ades.store.Categorie', {
 		'categorieProfessionnelle',
 		'descriptionCategorie',
 		'nomGroupe',
+		'nbSalaireBase',
 	],
 	proxy: {
 		type: 'ajax',

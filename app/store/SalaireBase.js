@@ -8,6 +8,7 @@ Ext.define('Gprh.ades.store.SalaireBase', {
 		'idLigneGrille',
 		'idGroupe',
 		'idCategorie',
+		'salaireBaseMinimum',
 		'salaireBase3',
 		'salaireBase4',
 		'salaireBase5',

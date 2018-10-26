@@ -158,11 +158,15 @@ Ext.define('Gprh.ades.view.ades.grille.GrilleMainContainer', {
 					xtype: 'actioncolumn',
 					items: [
 						{
-							renderer: () => '<span class="x-fa fa-close"></span>',
+							iconCls: 'x-fa fa-plus',
+							tooltip: 'Détails des salaires de base',
+							handler: 'showGrilleWindow',						
+						},
+						{
 							iconCls: 'x-fa fa-cog',
 							tooltip: 'Détails des salaires de base',
 							handler: 'showGrilleWindow',
-						},
+						}
 					],
 					cls: 'content-column',
 					width: 120,

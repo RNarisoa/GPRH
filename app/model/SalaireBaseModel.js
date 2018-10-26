@@ -5,6 +5,7 @@ Ext.define('Gprh.ades.model.SalaireBaseModel', {
 		'idLigneGrille',
 		'idGroupe',
 		'idCategorie',
+		{ name: 'salaireBaseMinimum', type: 'float' },
 		{ name: 'salaireBase3', type: 'float' },
 		{ name: 'salaireBase4', type: 'float' },
 		{ name: 'salaireBase5', type: 'float' },
